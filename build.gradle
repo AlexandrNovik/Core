@@ -1,0 +1,139 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+        mavenCentral()
+    }
+    ext {
+        gradlePluginVersion = '3.2.1'
+        kotlinVersion = '1.2.71'
+        googleServicesVersion = '3.2.0'
+        fabricVersion = '1+'
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradlePluginVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "com.google.gms:google-services:$googleServicesVersion"
+        classpath "io.fabric.tools:gradle:$fabricVersion"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+ext {
+    applicationId = "com.aliak.android.core"
+    // app versioning
+    versionMajor = 1
+    versionMinor = 0
+    versionPatch = 0
+    // android
+    compileSdkVersion = 28
+    buildToolsVersion = "27.0.3"
+    minimumSdkVersion = 21
+    targetSdkVersion = 27
+    supportVersion = "27.1.1"
+    constraintVersion = "1.1.2"
+    // version code/name
+    appVersionCode = generateVersionCode() // 210030200
+    appVersionName = generateVersionName() // 3.2.0
+    // javax
+    javaxVersion = '1'
+    // di
+    daggerVersion = '2.11'
+    // rx
+    rxJavaVersion = '2.1.14'
+    rxKotlinVersion = '2.1.0'
+    rxAndroidVersion = '2.1.0'
+    rxRelayVersion = '2.0.0'
+    rxNetworkVersion = '2.1.0'
+    funktionaleVersion = '1.2'
+    // сicerone
+    сiceroneVersion = '3.0.0'
+    // glide
+    glideVersion = '4.7.1'
+    // gson
+    gsonVersion = '2.8.4'
+    // okhttp
+    okhttpVersion = '3.11.0'
+    // retrofit
+    retrofitVersion = '2.4.0'
+    // logging
+    timberVersion = '4.6.0'
+    // mvp
+    moxyVersion = '1.5.3'
+    // db
+    roomVersion = "1.1.1"
+    // view pager indicator
+    pageIndicatorVersion = '1.0.0'
+    //firebase
+    firebaseCoreVersion = '16.0.1'
+    firebaseMessagingVersion = '17.3.4'
+
+    appDependencies = [
+            appCompat        : "com.android.support:appcompat-v7:$supportVersion",
+            design           : "com.android.support:design:$supportVersion",
+            constraint       : "com.android.support.constraint:constraint-layout:$constraintVersion",
+            dagger           : "com.google.dagger:dagger:$daggerVersion",
+            daggerCompiler   : "com.google.dagger:dagger-compiler:$daggerVersion",
+            glide            : "com.github.bumptech.glide:glide:$glideVersion",
+            rxAndroid        : "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+            moxyAppCompat    : "com.arello-mobile:moxy-app-compat:$moxyVersion",
+            moxyAndroid      : "com.arello-mobile:moxy-android:$moxyVersion",
+            moxyCompiler     : "com.arello-mobile:moxy-compiler:$moxyVersion",
+            firebaseMessaging: "com.google.firebase:firebase-messaging:$firebaseMessagingVersion",
+            firebaseCore     : "com.google.firebase:firebase-core:$firebaseCoreVersion",
+    ]
+
+    presentationDependencies = [
+            moxy        : "com.arello-mobile:moxy:$moxyVersion",
+            moxyAndroid : "com.arello-mobile:moxy-android:$moxyVersion",
+            moxyCompiler: "com.arello-mobile:moxy-compiler:$moxyVersion",
+            сicerone    : "ru.terrakok.cicerone:cicerone:$сiceroneVersion"
+    ]
+
+    domainDependencies = [
+            kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            javax            : "javax.inject:javax.inject:$javaxVersion",
+            rxJava           : "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            rxKotlin         : "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion",
+            rxRelay          : "com.jakewharton.rxrelay2:rxrelay:$rxRelayVersion",
+            funktionaleEither: "org.funktionale:funktionale-either:$funktionaleVersion",
+            funktionaleOption: "org.funktionale:funktionale-option:$funktionaleVersion"
+    ]
+
+    dataDependencies = [
+            gson                 : "com.google.code.gson:gson:$gsonVersion",
+            okHttp               : "com.squareup.okhttp3:okhttp:$okhttpVersion",
+            okHttpLogging        : "com.squareup.okhttp3:logging-interceptor:$okhttpVersion",
+            retrofit             : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitAdapter      : "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
+            timber               : "com.jakewharton.timber:timber:$timberVersion",
+            retrofitGsonConverter: "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            roomRuntime          : "android.arch.persistence.room:runtime:$roomVersion",
+            roomCompiler         : "android.arch.persistence.room:compiler:$roomVersion",
+            roomRxjava2          : "android.arch.persistence.room:rxjava2:$roomVersion"
+    ]
+}
+
+private String generateVersionName() {
+    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
+    return versionName
+}
+
+private Integer generateVersionCode() {
+    return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

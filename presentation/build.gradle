@@ -1,0 +1,17 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation project(':domain')
+    def dependencies = rootProject.ext.presentationDependencies
+    api presentationDependencies.сicerone
+    api dependencies.moxy
+    api dependencies.moxyAndroid
+    kapt dependencies.moxyCompiler
+}
+kapt {
+    arguments {
+        arg("moxyReflectorPackage", "com.aliak.android.presentation")
+    }
+}

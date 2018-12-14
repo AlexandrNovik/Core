@@ -1,0 +1,14 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    api project(':core')
+    def domainDependencies = rootProject.ext.domainDependencies
+    api domainDependencies.kotlin
+    api domainDependencies.javax
+    api domainDependencies.rxJava
+    api domainDependencies.rxKotlin
+    api domainDependencies.rxRelay
+    api domainDependencies.funktionaleEither
+    api domainDependencies.funktionaleOption
+}

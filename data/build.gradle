@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minimumSdkVersion
+    }
+}
+
+dependencies {
+    implementation project(':domain')
+
+    def dataDependency = rootProject.ext.dataDependencies
+    api dataDependency.gson
+    api dataDependency.okHttp
+    api dataDependency.okHttpLogging
+    api dataDependency.retrofit
+    api dataDependency.retrofitAdapter
+    api dataDependency.retrofitGsonConverter
+
+    implementation dataDependency.timber
+
+    api dataDependency.roomRuntime
+    kapt dataDependency.roomCompiler
+    api dataDependency.roomRxjava2
+
+}
